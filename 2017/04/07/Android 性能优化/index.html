@@ -19,10 +19,10 @@
 <meta name="keywords" content="android,优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android 性能优化">
-<meta property="og:url" content="http://yoursite.com/2017/04/07/Android/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/07/Android 性能优化/index.html">
 <meta property="og:site_name" content="The Coder Of WHOAMI">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;记录一些在实际开发中遇到的问题以及最优的解决办法，代码的优化不在于某一处而在于日常整体的积累">
-<meta property="og:updated_time" content="2017-04-08T08:57:09.826Z">
+<meta property="og:updated_time" content="2017-04-08T14:50:48.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android 性能优化">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;记录一些在实际开发中遇到的问题以及最优的解决办法，代码的优化不在于某一处而在于日常整体的积累">
@@ -263,10 +263,10 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Android" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Android 性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/07/Android/" class="article-date">
+      <a href="/2017/04/07/Android 性能优化/" class="article-date">
       <time datetime="2017-04-07T04:00:00.000Z" itemprop="datePublished">2017-04-07</time>
 </a>
 
@@ -312,19 +312,24 @@
 
 
 
-<h2 id="一、使用Sparse-array-来代替HashMap"><a href="#一、使用Sparse-array-来代替HashMap" class="headerlink" title="一、使用Sparse array 来代替HashMap"></a>一、使用Sparse array 来代替HashMap</h2><h2 id="二、xml布局中"><a href="#二、xml布局中" class="headerlink" title="二、xml布局中"></a>二、xml布局中</h2><p>Space控件在布局中只占位置，而不去绘制渲染。<br>组件中的间隙用Space控件填充比用其它控件填充可以提高绘制效率。</p>
-<h2 id="三、-遍历HashMap的最佳方法"><a href="#三、-遍历HashMap的最佳方法" class="headerlink" title="三、 遍历HashMap的最佳方法"></a>三、 遍历HashMap的最佳方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static void printMap(Map mp) &#123;</div><div class="line">    for (Map.Entry m : mp.entrySet()) &#123;</div><div class="line">            System.out.println(m.getKey() + &quot;:&quot; + m.getValue());</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="四、-recycleView-方法"><a href="#四、-recycleView-方法" class="headerlink" title="四、 recycleView   方法"></a>四、 recycleView   方法</h2><p>setHasFixedSized（true）<br>RecyclerView的尺寸在每次改变时，比如你加任何些东西。setHasFixedSize 的作用就是确保尺寸是通过用户输入从而确保RecyclerView的尺寸是一个常数。RecyclerView 的Item宽或者高不会变。每一个Item添加或者删除都不会变。如果你没有设置setHasFixedSized没有设置的代价将会是非常昂贵的。因为RecyclerView会需要而外计算每个item的size。</p>
-<h2 id="五、String-StringBuffer、StringBuilder使用"><a href="#五、String-StringBuffer、StringBuilder使用" class="headerlink" title="五、String StringBuffer、StringBuilder使用"></a>五、String StringBuffer、StringBuilder使用</h2><h2 id="六、sharedPreference-的apply-和-commit-异同"><a href="#六、sharedPreference-的apply-和-commit-异同" class="headerlink" title="六、sharedPreference 的apply 和 commit 异同"></a>六、sharedPreference 的apply 和 commit 异同</h2><ol>
+<h3 id="一、使用Sparse-array-来代替HashMap"><a href="#一、使用Sparse-array-来代替HashMap" class="headerlink" title="一、使用Sparse array 来代替HashMap"></a>一、使用Sparse array 来代替HashMap</h3><p>SparseArray是android里为”<interger,object>“这样的Hashmap而专门写的class,目的是提高效率，SparseArray在检索数据的时候使用的是二分查找，在大部分情况下性能要优于HashMap</interger,object></p>
+<h3 id="二、布局中使用-Space-替换View来占位"><a href="#二、布局中使用-Space-替换View来占位" class="headerlink" title="二、布局中使用 Space 替换View来占位"></a>二、布局中使用 Space 替换View来占位</h3><p>Space控件在布局中只占位置，而不去绘制渲染。<br>组件中的间隙用Space控件填充比用其它控件填充可以提高绘制效率。</p>
+<h3 id="三、-遍历HashMap的最佳方法"><a href="#三、-遍历HashMap的最佳方法" class="headerlink" title="三、 遍历HashMap的最佳方法"></a>三、 遍历HashMap的最佳方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public static void printMap(Map mp) &#123;</div><div class="line">    for (Map.Entry m : mp.entrySet()) &#123;</div><div class="line">            System.out.println(m.getKey() + &quot;:&quot; + m.getValue());</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="四、-RecyclerView"><a href="#四、-RecyclerView" class="headerlink" title="四、 RecyclerView"></a>四、 RecyclerView</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setHasFixedSized（true）</div></pre></td></tr></table></figure>
+<p>RecyclerView的尺寸在每次改变时，比如你加一些东西。setHasFixedSize 的作用就是确保尺寸是通过用户输入从而确保RecyclerView的尺寸是一个常数。RecyclerView 的Item宽或者高不会变。每一个Item添加或者删除都不会变。如果你没有设置setHasFixedSized没有设置的代价将会是非常昂贵的。因为RecyclerView会需要而外计算每个item的size。</p>
+<h3 id="五、String-StringBuffer、StringBuilder使用"><a href="#五、String-StringBuffer、StringBuilder使用" class="headerlink" title="五、String StringBuffer、StringBuilder使用"></a>五、String StringBuffer、StringBuilder使用</h3><p> String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String</p>
+<p> StringBuffer 线程安全的可变字符序列</p>
+<p>StringBuilder 非线程安全的可变字符序列</p>
+<p>总结：当不需要频繁操作字符串时使用 String<br>    当能保证线程安全时使用 StringBuilder 反之使用 StringBuffer</p>
+<h3 id="六、sharedPreference-的apply-和-commit-异同"><a href="#六、sharedPreference-的apply-和-commit-异同" class="headerlink" title="六、sharedPreference 的apply 和 commit 异同"></a>六、sharedPreference 的apply 和 commit 异同</h3><ol>
 <li><p>apply没有返回值，而commit返回boolean表明修改是否提交成功</p>
 </li>
 <li><p>apply是将修改数据原子提交到内存,而后异步真正提交到硬件磁盘，而commit是同步的提交到硬件磁盘，因此，在多个并发的提交commit的时候，他们会等待正在处理的commit保存到磁盘后在操作，从而降低了效率。而apply只是原子的提交到内容，后面有调用apply的函数的将会直接覆盖前面的内存数据，这样从一定程度上提高了很多效率。 </p>
 </li>
 <li>apply方法不会提示任何失败的提示，由于在一个进程中，sharedPreference是单实例，一般不会出现并发冲突，如果对提交的结果不关心的话，建议使用apply，当然需要确保提交成功且有后续操作的话，还是需要用commit的。</li>
 </ol>
-<h2 id="七-数组的遍历"><a href="#七-数组的遍历" class="headerlink" title="七 数组的遍历"></a>七 数组的遍历</h2><p>实现了RandomAccess的List（例如ArrayList），在遍历的时候使用for循环而不使用foreach。而对于没有实现RandomAccess的List（例如LinkedList），遍历使用Iterator更有效率一点。</p>
-<p>八、for循环的最佳实现写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for（int i = 0 , len = list.size();i&lt;len;i++）&#123;</div><div class="line">        log.d(&quot;print&quot;+i);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="七、数组的遍历"><a href="#七、数组的遍历" class="headerlink" title="七、数组的遍历"></a>七、数组的遍历</h3><p>实现了RandomAccess的List（例如ArrayList），在遍历的时候使用for循环而不使用foreach。而对于没有实现RandomAccess的List（例如LinkedList），遍历使用Iterator更有效率一点。</p>
+<h3 id="八、for循环的最佳实现写法"><a href="#八、for循环的最佳实现写法" class="headerlink" title="八、for循环的最佳实现写法"></a>八、for循环的最佳实现写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for（int i = 0 , len = list.size();i&lt;len;i++）&#123;</div><div class="line">        log.d(&quot;print&quot;+i);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>而不是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for（int i = 0;i&lt;list.size();i++）&#123;</div><div class="line">        log.d(&quot;print&quot;+i);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p> 虽然在写法上简洁了一些，但是当遇到list长度较长时，就会有一些区别了</p>
 </the>
@@ -335,13 +340,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/07/Android/">android 性能优化</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/07/Android 性能优化/">android 性能优化</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">WHOAMI</a></p>
         <p><span>发布时间:</span>2017-04-07, 12:00:00</p>
-        <p><span>最后更新:</span>2017-04-08, 16:57:09</p>
+        <p><span>最后更新:</span>2017-04-08, 22:50:48</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/04/07/Android/" title="android 性能优化">http://yoursite.com/2017/04/07/Android/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/04/07/Android/　　作者: WHOAMI" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/07/Android 性能优化/" title="android 性能优化">http://yoursite.com/2017/04/07/Android 性能优化/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/04/07/Android 性能优化/　　作者: WHOAMI" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -357,7 +362,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、使用Sparse-array-来代替HashMap"><span class="toc-number">1.</span> <span class="toc-text">一、使用Sparse array 来代替HashMap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、xml布局中"><span class="toc-number">2.</span> <span class="toc-text">二、xml布局中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、-遍历HashMap的最佳方法"><span class="toc-number">3.</span> <span class="toc-text">三、 遍历HashMap的最佳方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、-recycleView-方法"><span class="toc-number">4.</span> <span class="toc-text">四、 recycleView   方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、String-StringBuffer、StringBuilder使用"><span class="toc-number">5.</span> <span class="toc-text">五、String StringBuffer、StringBuilder使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、sharedPreference-的apply-和-commit-异同"><span class="toc-number">6.</span> <span class="toc-text">六、sharedPreference 的apply 和 commit 异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-数组的遍历"><span class="toc-number">7.</span> <span class="toc-text">七 数组的遍历</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、使用Sparse-array-来代替HashMap"><span class="toc-number">1.</span> <span class="toc-text">一、使用Sparse array 来代替HashMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、布局中使用-Space-替换View来占位"><span class="toc-number">2.</span> <span class="toc-text">二、布局中使用 Space 替换View来占位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-遍历HashMap的最佳方法"><span class="toc-number">3.</span> <span class="toc-text">三、 遍历HashMap的最佳方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-RecyclerView"><span class="toc-number">4.</span> <span class="toc-text">四、 RecyclerView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、String-StringBuffer、StringBuilder使用"><span class="toc-number">5.</span> <span class="toc-text">五、String StringBuffer、StringBuilder使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、sharedPreference-的apply-和-commit-异同"><span class="toc-number">6.</span> <span class="toc-text">六、sharedPreference 的apply 和 commit 异同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、数组的遍历"><span class="toc-number">7.</span> <span class="toc-text">七、数组的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、for循环的最佳实现写法"><span class="toc-number">8.</span> <span class="toc-text">八、for循环的最佳实现写法</span></a></li></ol>
         
     </div>
     <style>
@@ -409,7 +414,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/07/Android/" data-title="android 性能优化" data-url="http://yoursite.com/2017/04/07/Android/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/07/Android 性能优化/" data-title="android 性能优化" data-url="http://yoursite.com/2017/04/07/Android 性能优化/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -442,7 +447,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/07/Android/">android 性能优化</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/07/Android 性能优化/">android 性能优化</a></li></ul>
 
 
 
